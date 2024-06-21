@@ -1,17 +1,24 @@
 import React, { useState } from 'react';
+import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { app } from '../../firebase';
 import './auth.css';
 
 const AuthPage: React.FC = () => {
   const [authId, setAuthId] = useState('');
   const [authPwd, setAuthPwd] = useState('');
 
-  const handleLogin = () => {
+  const onSubmit = async () => {
+    try {
+      const newUser = await createUserWithEmailAndPassword();
+    } catch (error) {
+      console.error(error);
+    }
     console.log(authId);
     console.log(authPwd);
   };
 
   return (
-    <div className='authDiv'>
+    <div className='authDiv' onSubmit={onSubmit}>
       <p>로고</p>
       <div className='authInput'>
         <label htmlFor='id'>id</label>
@@ -33,7 +40,7 @@ const AuthPage: React.FC = () => {
           onChange={(e) => setAuthPwd(e.target.value)}
         />
       </div>
-      <button onClick={handleLogin}>로그인</button>
+      <button type='button'>로그인</button>
     </div>
   );
 };
