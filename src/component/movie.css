@@ -1,3 +1,12 @@
-.all{
-    display: flex;
+.all {
+  display: flex;
+}
+
+.toggleBtn {
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.toggleBtn.active {
+  color: rgb(114, 0, 228);
 }
