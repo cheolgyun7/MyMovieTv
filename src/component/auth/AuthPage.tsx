@@ -4,8 +4,9 @@ import {
   getAuth,
   signInWithEmailAndPassword
 } from 'firebase/auth';
-import { app } from '../../firebase';
+import { app, db } from '../../firebase';
 import './auth.css';
+import { doc, setDoc } from 'firebase/firestore';
 
 const AuthPage: React.FC = () => {
   const [authId, setAuthId] = useState('');
@@ -22,6 +23,10 @@ const AuthPage: React.FC = () => {
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isRegister) {
+      if (authPwd !== authchkPwd) {
+        alert('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
+        return;
+      }
       try {
         const newUser = await createUserWithEmailAndPassword(
           auth,
@@ -29,6 +34,11 @@ const AuthPage: React.FC = () => {
           authPwd
         );
         console.log('회원가입성공', newUser);
+        await setDoc(doc(db, 'users', newUser.user.uid), {
+          email: authId,
+          createdAt: new Date().toISOString()
+        });
+        alert('회원가입성공');
       } catch (error) {
         console.log('11!!');
         console.error(error);
