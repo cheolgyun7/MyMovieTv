@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -7,6 +7,8 @@ import {
 import { app, db } from '../../firebase';
 import './auth.css';
 import { doc, setDoc } from 'firebase/firestore';
+import { useAuthStore } from '../../store/authStore';
+import { useNavigate } from 'react-router-dom';
 
 const AuthPage: React.FC = () => {
   const [authId, setAuthId] = useState('');
@@ -14,11 +16,21 @@ const AuthPage: React.FC = () => {
   const [authchkPwd, setAuthchkPwd] = useState('');
   const [isRegister, setIsRegister] = useState(false); //false면 로그인 true면 회원가입
 
+  const { isLoggedIn, userEmail, setUserEmail, setIsLoggedIn, chkAuthState } =
+    useAuthStore();
+  const navigate = useNavigate();
+
   const auth = getAuth(app);
+
+  useEffect(() => {
+    chkAuthState();
+  }, [chkAuthState]);
 
   const handleToggleRegister = () => {
     setIsRegister(!isRegister);
   };
+
+  console.log(chkAuthState);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,7 +58,10 @@ const AuthPage: React.FC = () => {
     } else {
       try {
         const newUser = await signInWithEmailAndPassword(auth, authId, authPwd);
-        console.log(newUser);
+        console.log('로그인성공', newUser);
+        setIsLoggedIn(true);
+        setUserEmail(authId);
+        navigate('/');
       } catch (error) {
         console.log('????');
         console.error(error);
