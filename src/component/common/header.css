@@ -1,5 +1,52 @@
 header {
-  width: 20rem;
+  width: calc(100% - 2rem);
   height: 5rem;
-  background-color: gray;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.user_Info {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.user_Info span {
+  margin-right: 1rem;
+}
+.loginBtn {
+  cursor: pointer;
+}
+.dropdown-menu {
+  position: absolute;
+  top: 2rem;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+}
+
+.dropdown-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown-menu li {
+  padding: 0.5rem 1rem;
+}
+
+.link_Button {
+  background: none;
+  border: none;
+  color: black;
+  cursor: pointer;
+  padding: 0;
+  font: inherit;
+}
+.link_Button:hover {
+  color: rgb(167, 14, 255);
 }

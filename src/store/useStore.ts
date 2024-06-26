@@ -5,7 +5,7 @@ type MovieStore = {
   addFavorite: (id: number) => void;
   removeFavorite: (id: number) => void;
   isToggle: boolean;
-  toggleCategory: () => void;
+  setIsToggle: (id: boolean) => void;
 };
 
 const useMovieStore = create<MovieStore>((set) => ({
@@ -17,7 +17,7 @@ const useMovieStore = create<MovieStore>((set) => ({
       favoriteMovies: state.favoriteMovies.filter((movieId) => movieId !== id)
     })),
   isToggle: true,
-  toggleCategory: () => set((state) => ({ isToggle: !state.isToggle }))
+  setIsToggle: (toggle) => set({ isToggle: toggle })
 }));
 
 export default useMovieStore;

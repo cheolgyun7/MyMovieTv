@@ -5,7 +5,6 @@ import { app } from '../../firebase';
 import './header.css';
 import { useNavigate } from 'react-router-dom';
 
-import { FaRegUser } from 'react-icons/fa';
 import { TbTriangleInvertedFilled, TbTriangleFilled } from 'react-icons/tb';
 
 const Header = () => {
@@ -35,8 +34,11 @@ const Header = () => {
   };
   return (
     <header>
+      <div className='logoDiv'>
+        <span>로고</span>
+      </div>
       {isLoggedIn ? (
-        <>
+        <div className='user_Info'>
           <span>{userNickname}님, 환영합니다</span>{' '}
           {myInfoToggle ? (
             <TbTriangleFilled onClick={handleMyInfoToggle} />
@@ -44,19 +46,18 @@ const Header = () => {
             <TbTriangleInvertedFilled onClick={handleMyInfoToggle} />
           )}
           {myInfoToggle && (
-            <ul>
-              <li>내 달력 보기</li>
-              <li>내 정보 수정</li>
-              <li>
-                <a onClick={handleLogout}>로그아웃</a>
+            <ul className='dropdown-menu'>
+              <li className='link_Button'>내 달력 보기</li>
+              <li className='link_Button'>내 정보 수정</li>
+              <li onClick={handleLogout} className='link_Button'>
+                로그아웃
               </li>
             </ul>
           )}
-        </>
+        </div>
       ) : (
-        <div onClick={handleLogin}>
-          <FaRegUser />
-          로그인
+        <div className='user_Info' onClick={handleLogin}>
+          <span className='loginBtn'>로그인</span>
         </div>
       )}
     </header>

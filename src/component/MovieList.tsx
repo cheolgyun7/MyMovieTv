@@ -10,7 +10,7 @@ const MovieList: React.FC = () => {
   // const toggleButton = (isToggle: boolean) => {
   //   setSelectCategory(isToggle);
   // };
-  const { isToggle, toggleCategory } = useMovieStore();
+  const { isToggle, setIsToggle } = useMovieStore();
   const {
     data: movies,
     isLoading: mIsLoading,
@@ -37,12 +37,12 @@ const MovieList: React.FC = () => {
       <div>
         <span
           className={`toggleBtn ${isToggle ? 'active' : ''}`}
-          onClick={toggleCategory}>
+          onClick={() => setIsToggle(true)}>
           Movie
         </span>
         <span
           className={`toggleBtn ${!isToggle ? 'active' : ''}`}
-          onClick={toggleCategory}>
+          onClick={() => setIsToggle(false)}>
           TV
         </span>
       </div>
