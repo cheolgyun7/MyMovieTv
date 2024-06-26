@@ -1,12 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAuthStore } from '../../store/authStore';
 import { getAuth, signOut } from 'firebase/auth';
 import { app } from '../../firebase';
+import './header.css';
+import { useNavigate } from 'react-router-dom';
+
 import { FaRegUser } from 'react-icons/fa';
+import { TbTriangleInvertedFilled, TbTriangleFilled } from 'react-icons/tb';
 
 const Header = () => {
-  const { isLoggedIn, userEmail, setIsLoggedIn, setUserEmail } = useAuthStore();
+  const { isLoggedIn, userNickname, setIsLoggedIn, setUserEmail } =
+    useAuthStore();
   const auth = getAuth(app);
+  const [myInfoToggle, setMyInfoToggle] = useState(false);
+
+  const handleMyInfoToggle = () => {
+    setMyInfoToggle(!myInfoToggle);
+  };
+
+  const navigate = useNavigate();
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
@@ -18,18 +30,36 @@ const Header = () => {
         console.error('로그아웃 에러:', error);
       });
   };
+  const handleLogin = () => {
+    navigate('/auth');
+  };
   return (
-    <div>
-      <p>{userEmail}</p>
+    <header>
       {isLoggedIn ? (
-        <button onClick={handleLogout}>로그아웃</button>
+        <>
+          <span>{userNickname}님, 환영합니다</span>{' '}
+          {myInfoToggle ? (
+            <TbTriangleFilled onClick={handleMyInfoToggle} />
+          ) : (
+            <TbTriangleInvertedFilled onClick={handleMyInfoToggle} />
+          )}
+          {myInfoToggle && (
+            <ul>
+              <li>내 달력 보기</li>
+              <li>내 정보 수정</li>
+              <li>
+                <a onClick={handleLogout}>로그아웃</a>
+              </li>
+            </ul>
+          )}
+        </>
       ) : (
-        <div>
+        <div onClick={handleLogin}>
           <FaRegUser />
           로그인
         </div>
       )}
-    </div>
+    </header>
   );
 };
 

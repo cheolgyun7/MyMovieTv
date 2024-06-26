@@ -14,6 +14,7 @@ const AuthPage: React.FC = () => {
   const [authId, setAuthId] = useState('');
   const [authPwd, setAuthPwd] = useState('');
   const [authchkPwd, setAuthchkPwd] = useState('');
+  const [authNickname, setAuthchkNickname] = useState('');
   const [isRegister, setIsRegister] = useState(false); //false면 로그인 true면 회원가입
 
   const { isLoggedIn, userEmail, setUserEmail, setIsLoggedIn, chkAuthState } =
@@ -48,7 +49,8 @@ const AuthPage: React.FC = () => {
         console.log('회원가입성공', newUser);
         await setDoc(doc(db, 'users', newUser.user.uid), {
           email: authId,
-          createdAt: new Date().toISOString()
+          createdAt: new Date().toISOString(),
+          nickname: authNickname
         });
         alert('회원가입성공');
       } catch (error) {
@@ -58,12 +60,10 @@ const AuthPage: React.FC = () => {
     } else {
       try {
         const newUser = await signInWithEmailAndPassword(auth, authId, authPwd);
-        console.log('로그인성공', newUser);
         setIsLoggedIn(true);
         setUserEmail(authId);
         navigate('/');
       } catch (error) {
-        console.log('????');
         console.error(error);
       }
     }
@@ -93,16 +93,28 @@ const AuthPage: React.FC = () => {
         />
       </div>
       {isRegister && (
-        <div className='authInput'>
-          <label htmlFor='pwdchk'>비밀번호확인</label>
-          <input
-            id='pwdchk'
-            type='password'
-            placeholder='비밀번호확인'
-            value={authchkPwd}
-            onChange={(e) => setAuthchkPwd(e.target.value)}
-          />
-        </div>
+        <>
+          <div className='authInput'>
+            <label htmlFor='pwdchk'>비밀번호확인</label>
+            <input
+              id='pwdchk'
+              type='password'
+              placeholder='비밀번호확인'
+              value={authchkPwd}
+              onChange={(e) => setAuthchkPwd(e.target.value)}
+            />
+          </div>
+          <div className='authInput'>
+            <label htmlFor='nickname'>닉네임</label>
+            <input
+              id='pwdchk'
+              type='text'
+              placeholder='닉네임'
+              value={authNickname}
+              onChange={(e) => setAuthchkNickname(e.target.value)}
+            />
+          </div>
+        </>
       )}
       <button className='loginBtn' type='submit'>
         {isRegister === false ? '로그인' : '회원가입'}
