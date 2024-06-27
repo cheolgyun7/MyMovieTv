@@ -1,0 +1,54 @@
+.all {
+  /* display: flex; */
+}
+
+.toggleBtn {
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.toggleBtn.active {
+  color: rgb(114, 0, 228);
+}
+
+.CardList {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/*  */
+/* 
+.all {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 1600px) {
+  .all {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (min-width: 1280px) and (max-width: 1599px) {
+  .all {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 1080px) and (max-width: 1279px) {
+  .all {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1079px) {
+  .all {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .all {
+    grid-template-columns: 1fr;
+  }
+} */

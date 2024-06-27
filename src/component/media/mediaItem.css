@@ -1,0 +1,57 @@
+.CardBox {
+  background-color: rgb(251, 215, 215);
+  margin: 1rem;
+  width: 20rem;
+  height: 30rem;
+  position: relative;
+  transition: all 0.5s;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+.card_Front .info {
+  position: relative;
+}
+.info img {
+  width: 100%;
+}
+.info svg {
+  position: absolute;
+  right: 0px;
+  top: 0;
+}
+
+.card_Front,
+.card_Back {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+}
+
+.card_Front {
+  z-index: 2;
+}
+
+.card_Back {
+  z-index: 1;
+  transform: rotateY(180deg);
+}
+
+.flipped {
+  transform: rotateY(180deg);
+}
+
+/* .card_Front {
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  position: absolute;
+  backface-visibility: hidden;
+}
+
+.card_Back {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  transform: rotateY(180deg);
+} */

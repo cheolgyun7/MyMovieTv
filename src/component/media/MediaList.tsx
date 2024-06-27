@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import useMovieStore from '../store/useStore';
-import { useMovies, useTv } from '../hooks/useMovies';
-import { Movie, TV } from '../types/Movie';
-import './movie.css';
+import useMovieStore from '../../store/useStore';
+import { useMovies, useTv } from '../../hooks/useMovies';
+import { Media } from '../../types/Media';
+import MediaItem from './MediaItem';
 
-const MovieList: React.FC = () => {
+import './mediaList.css';
+
+const MediaList: React.FC = () => {
   const [page, setPage] = useState(1);
   // const [selectCategory, setSelectCategory] = useState(true);
   // const toggleButton = (isToggle: boolean) => {
@@ -46,17 +48,19 @@ const MovieList: React.FC = () => {
           TV
         </span>
       </div>
-      {isToggle &&
-        movies?.map((movie: Movie) => (
-          <li key={movie.id}>
-            {movie.title}
-            <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} />
-            <button onClick={() => addFavorite(movie.id)}>
-              Add to Favorites
-            </button>
-          </li>
-        ))}
-      {/* <div>
+      <div className='CardList'>
+        {isToggle &&
+          movies?.map((movie: Media) => (
+            // <div key={movie.id}>
+            //   {movie.title}
+            //   <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} />
+            //   <button onClick={() => addFavorite(movie.id)}>
+            //     Add to Favorites
+            //   </button>
+            // </div>
+            <MediaItem key={movie.id} item={movie} />
+          ))}
+        {/* <div>
         <div>
           <button onClick={() => setPage((prev) => Math.max(prev - 1, 1))}>
             Previous
@@ -64,14 +68,17 @@ const MovieList: React.FC = () => {
           <button onClick={() => setPage((prev) => prev + 1)}>Next</button>
         </div>
       </div> */}
-      {!isToggle &&
-        tvshows?.map((tv: TV) => (
-          <li key={tv.id}>
-            {tv.name}
-            <img src={`https://image.tmdb.org/t/p/w200${tv.poster_path}`} />
-            <button onClick={() => addFavorite(tv.id)}>Add to Favorites</button>
-          </li>
-        ))}
+        {!isToggle &&
+          tvshows?.map((tv: Media) => (
+            // <li key={tv.id}>
+            //   {tv.name}
+            //   <img src={`https://image.tmdb.org/t/p/w200${tv.poster_path}`} />
+            //   <button onClick={() => addFavorite(tv.id)}>Add to Favorites</button>
+            // </li>
+            <MediaItem key={tv.id} item={tv} />
+          ))}{' '}
+      </div>
+
       <div>
         <h2>All TV</h2>
         <ul></ul>
@@ -86,4 +93,4 @@ const MovieList: React.FC = () => {
   );
 };
 
-export default MovieList;
+export default MediaList;

@@ -19,15 +19,18 @@ const Header = () => {
 
   const navigate = useNavigate();
   const handleLogout = () => {
-    signOut(auth)
-      .then(() => {
-        setIsLoggedIn(false); // 로그아웃 시 isLoggedIn 상태 변경
-        setUserEmail(''); // 사용자 이메일 초기화
-        localStorage.removeItem('userLocalStorage'); // localStorage 초기화
-      })
-      .catch((error) => {
-        console.error('로그아웃 에러:', error);
-      });
+    const confirmLogout = window.confirm('로그아웃을 진행하시겠습니까?');
+    if (confirmLogout) {
+      signOut(auth)
+        .then(() => {
+          setIsLoggedIn(false); // 로그아웃 시 isLoggedIn 상태 변경
+          setUserEmail(''); // 사용자 이메일 초기화
+          localStorage.removeItem('userLocalStorage'); // localStorage 초기화
+        })
+        .catch((error) => {
+          console.error('로그아웃 에러:', error);
+        });
+    }
   };
   const handleLogin = () => {
     navigate('/auth');
