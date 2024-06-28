@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import useMovieStore from '../../store/useStore';
 import { useMovies, useTv } from '../../hooks/useMovies';
 import { Media } from '../../types/Media';
@@ -7,6 +8,7 @@ import MediaItem from './MediaItem';
 import './mediaList.css';
 
 const MediaList: React.FC = () => {
+  const queryClient = useQueryClient();
   const [page, setPage] = useState(1);
   // const [selectCategory, setSelectCategory] = useState(true);
   // const toggleButton = (isToggle: boolean) => {
@@ -29,6 +31,10 @@ const MediaList: React.FC = () => {
   const favoriteMovies = useMovieStore((state) => state.favoriteMovies);
   console.log(addFavorite);
   console.log(favoriteMovies);
+  const handleToggleBtn = (id: boolean) => {
+    setIsToggle(id);
+    setPage(1);
+  };
 
   if (mIsLoading || mIsFetching || tIsLoading || tIsFetching)
     return <div>Loading...</div>;
@@ -39,12 +45,12 @@ const MediaList: React.FC = () => {
       <div>
         <span
           className={`toggleBtn ${isToggle ? 'active' : ''}`}
-          onClick={() => setIsToggle(true)}>
+          onClick={() => handleToggleBtn(true)}>
           Movie
         </span>
         <span
           className={`toggleBtn ${!isToggle ? 'active' : ''}`}
-          onClick={() => setIsToggle(false)}>
+          onClick={() => handleToggleBtn(false)}>
           TV
         </span>
       </div>

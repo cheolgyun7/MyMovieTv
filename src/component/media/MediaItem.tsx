@@ -18,16 +18,16 @@ const MediaItem: React.FC<MediaItemProps> = ({ item }) => {
   return (
     <div className='wrapper'>
       <div className={`CardBox ${flipped ? 'flipped' : ''}`}>
-        <div className='card_Front'>
+        <div className='card_Front' onClick={handleFlip}>
           <p className='info'>
             <img src={`https://image.tmdb.org/t/p/w200${item.poster_path}`} />
-            <IoIosInformationCircle onClick={handleFlip} size={24} />
+            <IoIosInformationCircle size={24} />
           </p>
         </div>
-        <div className='card_Back'>
+        <div className='card_Back' onClick={handleFlip}>
           <div className='info'>
             <h4>{item.title ? item.title : item.name}</h4>
-            <TfiBackRight onClick={handleFlip} size={24} />
+            <TfiBackRight size={24} />
           </div>
         </div>
       </div>
