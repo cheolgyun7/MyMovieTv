@@ -13,7 +13,7 @@ type SearchStore = {
   setSearchQuery: (query: string) => void;
 };
 
-export const useMovieStore = create<MovieStore>((set) => ({
+export const useMovieStore = create<MovieStore & SearchStore>((set) => ({
   favoriteMovies: [],
   addFavorite: (id) =>
     set((state) => ({ favoriteMovies: [...state.favoriteMovies, id] })),
@@ -22,7 +22,9 @@ export const useMovieStore = create<MovieStore>((set) => ({
       favoriteMovies: state.favoriteMovies.filter((movieId) => movieId !== id)
     })),
   isToggle: true,
-  setIsToggle: (toggle) => set({ isToggle: toggle })
+  setIsToggle: (toggle) => set({ isToggle: toggle }),
+  searchQuery: '', // 추가된 부분
+  setSearchQuery: (query) => set({ searchQuery: query }) // 추가된 부분
 }));
 
 export const useStore = create<SearchStore>((set) => ({

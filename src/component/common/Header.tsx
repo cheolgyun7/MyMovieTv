@@ -39,7 +39,7 @@ const Header = () => {
   return (
     <header>
       <div className='logoDiv'>
-        <span>로고</span>
+        <div>로고</div>
       </div>
       <SearchInput />
       {isLoggedIn ? (
