@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import useMovieStore from '../../store/useStore';
+import { useMovieStore, useStore } from '../../store/useStore';
 import { useMovies, useTv } from '../../hooks/useMovies';
 import { Media } from '../../types/Media';
 import MediaItem from './MediaItem';
@@ -10,10 +10,10 @@ import './mediaList.css';
 const MediaList: React.FC = () => {
   const queryClient = useQueryClient();
   const [page, setPage] = useState(1);
-  // const [selectCategory, setSelectCategory] = useState(true);
-  // const toggleButton = (isToggle: boolean) => {
-  //   setSelectCategory(isToggle);
-  // };
+
+  // Extract searchQuery directly from useStore()
+  const { searchQuery } = useStore();
+
   const { isToggle, setIsToggle } = useMovieStore();
   const {
     data: movies,
@@ -28,9 +28,6 @@ const MediaList: React.FC = () => {
     isFetching: tIsFetching
   } = useTv(page);
   const addFavorite = useMovieStore((state) => state.addFavorite);
-  const favoriteMovies = useMovieStore((state) => state.favoriteMovies);
-  console.log(addFavorite);
-  console.log(favoriteMovies);
   const handleToggleBtn = (id: boolean) => {
     setIsToggle(id);
     setPage(1);
@@ -39,6 +36,15 @@ const MediaList: React.FC = () => {
   if (mIsLoading || mIsFetching || tIsLoading || tIsFetching)
     return <div>Loading...</div>;
   if (mIsError || tIsError) return <div>Error fetching movies</div>;
+
+  // Ensure searchQuery is treated as a string
+  const filteredMovies = movies?.filter((movie: Media) =>
+    movie.title?.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const filteredTvShows = tvshows?.filter((tv: Media) =>
+    tv.name?.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div className='all'>
@@ -56,33 +62,13 @@ const MediaList: React.FC = () => {
       </div>
       <div className='CardList'>
         {isToggle &&
-          movies?.map((movie: Media) => (
-            // <div key={movie.id}>
-            //   {movie.title}
-            //   <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} />
-            //   <button onClick={() => addFavorite(movie.id)}>
-            //     Add to Favorites
-            //   </button>
-            // </div>
+          filteredMovies?.map((movie: Media) => (
             <MediaItem key={movie.id} item={movie} />
           ))}
-        {/* <div>
-        <div>
-          <button onClick={() => setPage((prev) => Math.max(prev - 1, 1))}>
-            Previous
-          </button>
-          <button onClick={() => setPage((prev) => prev + 1)}>Next</button>
-        </div>
-      </div> */}
         {!isToggle &&
-          tvshows?.map((tv: Media) => (
-            // <li key={tv.id}>
-            //   {tv.name}
-            //   <img src={`https://image.tmdb.org/t/p/w200${tv.poster_path}`} />
-            //   <button onClick={() => addFavorite(tv.id)}>Add to Favorites</button>
-            // </li>
+          filteredTvShows?.map((tv: Media) => (
             <MediaItem key={tv.id} item={tv} />
-          ))}{' '}
+          ))}
       </div>
 
       <div>

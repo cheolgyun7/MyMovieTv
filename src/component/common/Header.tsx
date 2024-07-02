@@ -6,6 +6,7 @@ import './header.css';
 import { useNavigate } from 'react-router-dom';
 
 import { TbTriangleInvertedFilled, TbTriangleFilled } from 'react-icons/tb';
+import SearchInput from './SearchInput';
 
 const Header = () => {
   const { isLoggedIn, userNickname, setIsLoggedIn, setUserEmail } =
@@ -40,6 +41,7 @@ const Header = () => {
       <div className='logoDiv'>
         <span>로고</span>
       </div>
+      <SearchInput />
       {isLoggedIn ? (
         <div className='user_Info'>
           <span>{userNickname}님, 환영합니다</span>{' '}

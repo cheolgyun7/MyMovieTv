@@ -8,7 +8,12 @@ type MovieStore = {
   setIsToggle: (id: boolean) => void;
 };
 
-const useMovieStore = create<MovieStore>((set) => ({
+type SearchStore = {
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
+};
+
+export const useMovieStore = create<MovieStore>((set) => ({
   favoriteMovies: [],
   addFavorite: (id) =>
     set((state) => ({ favoriteMovies: [...state.favoriteMovies, id] })),
@@ -20,4 +25,7 @@ const useMovieStore = create<MovieStore>((set) => ({
   setIsToggle: (toggle) => set({ isToggle: toggle })
 }));
 
-export default useMovieStore;
+export const useStore = create<SearchStore>((set) => ({
+  searchQuery: '', //초기 검색어 상태
+  setSearchQuery: (query) => set({ searchQuery: query }) // 검색어 설정 함수
+}));
