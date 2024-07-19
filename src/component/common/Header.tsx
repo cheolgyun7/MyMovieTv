@@ -36,6 +36,14 @@ const Header = () => {
   const handleLogin = () => {
     navigate('/auth');
   };
+  const handleMypage = (menu: string) => {
+    if (menu == 'mycalendar') {
+      navigate('/mycalendar');
+    } else {
+      navigate('/mypage');
+    }
+    setMyInfoToggle(!myInfoToggle);
+  };
   return (
     <header>
       <div className='logoDiv'>
@@ -52,8 +60,16 @@ const Header = () => {
           )}
           {myInfoToggle && (
             <ul className='dropdown-menu'>
-              <li className='link_Button'>내 달력 보기</li>
-              <li className='link_Button'>내 정보 수정</li>
+              <li
+                className='link_Button'
+                onClick={() => handleMypage('mycalendar')}>
+                내 달력 보기
+              </li>
+              <li
+                className='link_Button'
+                onClick={() => handleMypage('mypage')}>
+                내 정보 수정
+              </li>
               <li onClick={handleLogout} className='link_Button'>
                 로그아웃
               </li>

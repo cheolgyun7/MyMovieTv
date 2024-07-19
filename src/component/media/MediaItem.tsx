@@ -19,7 +19,7 @@ const MediaItem: React.FC<MediaItemProps> = ({ item }) => {
     <div className='wrapper'>
       <div className={`CardBox ${flipped ? 'flipped' : ''}`}>
         <div className='card_Front' onClick={handleFlip}>
-          <p className='info'>
+          <div className='info'>
             <div className='image-container'>
               <img
                 alt={item.name}
@@ -27,7 +27,7 @@ const MediaItem: React.FC<MediaItemProps> = ({ item }) => {
               />
             </div>
             <IoIosInformationCircle size={24} />
-          </p>
+          </div>
         </div>
         <div className='card_Back' onClick={handleFlip}>
           <div className='info'>
