@@ -20,10 +20,12 @@ const MediaItem: React.FC<MediaItemProps> = ({ item }) => {
       <div className={`CardBox ${flipped ? 'flipped' : ''}`}>
         <div className='card_Front' onClick={handleFlip}>
           <p className='info'>
-            <img
-              alt={item.name}
-              src={`https://image.tmdb.org/t/p/w200${item.poster_path}`}
-            />
+            <div className='image-container'>
+              <img
+                alt={item.name}
+                src={`https://image.tmdb.org/t/p/w200${item.poster_path}`}
+              />
+            </div>
             <IoIosInformationCircle size={24} />
           </p>
         </div>

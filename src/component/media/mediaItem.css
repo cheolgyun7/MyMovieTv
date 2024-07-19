@@ -7,17 +7,21 @@
   perspective: 1000px;
   transform-style: preserve-3d;
 }
+
 .card_Front .info {
   position: relative;
 }
+
 .wrapper {
   width: 20%;
 }
+
 .info img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
+
 .info svg {
   position: absolute;
   right: 0px;
@@ -46,17 +50,18 @@
   transform: rotateY(180deg);
 }
 
-/* .card_Front {
+.image-container {
   width: 100%;
-  height: 100%;
-  z-index: 2;
-  position: absolute;
-  backface-visibility: hidden;
+  position: relative;
+  padding-top: 150%; /* 이미지 비율을 2:3으로 설정 (높이/너비 비율) */
 }
 
-.card_Back {
+.image-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1;
-  transform: rotateY(180deg);
-} */
+  object-fit: cover; /* 이미지 비율을 유지하면서 컨테이너에 맞게 조정 */
+  object-position: center; /* 이미지 중앙에 맞춤 */
+}
