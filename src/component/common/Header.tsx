@@ -37,7 +37,7 @@ const Header = () => {
     navigate('/auth');
   };
   const handleMypage = (menu: string) => {
-    if (menu == 'mycalendar') {
+    if (menu === 'mycalendar') {
       navigate('/mycalendar');
     } else {
       navigate('/mypage');
