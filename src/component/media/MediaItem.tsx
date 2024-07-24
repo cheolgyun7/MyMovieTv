@@ -31,7 +31,7 @@ const MediaItem: React.FC<MediaItemProps> = ({ item }) => {
         </div>
         <div className='card_Back' onClick={handleFlip}>
           <div className='info'>
-            <h4>{item.title ? item.title : item.name}</h4>
+            <h4>{item.title ? item.title : item.name}..</h4>
             <TfiBackRight size={24} />
           </div>
         </div>
