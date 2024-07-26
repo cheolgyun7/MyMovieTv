@@ -24,21 +24,29 @@
 
 .info svg {
   position: absolute;
-  right: 0px;
-  top: 0;
+  right: 3px;
+  top: 3px;
+}
+.card_Front .info svg {
+  background-color: black;
+  border-radius: 30px;
+}
+.card_Front .info svg:hover {
+  background-color: rgb(255, 120, 255);
 }
 
 .card_Front,
 .card_Back {
   width: 100%;
-  background-color: black;
   backface-visibility: hidden;
 }
 
 .card_Front {
   z-index: 2;
 }
-
+.card_Front > .infoBox {
+  background-color: red;
+}
 .card_Back {
   z-index: 1;
   transform: rotateY(180deg);

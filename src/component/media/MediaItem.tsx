@@ -18,7 +18,7 @@ const MediaItem: React.FC<MediaItemProps> = ({ item }) => {
   return (
     <div className='wrapper'>
       <div className={`CardBox ${flipped ? 'flipped' : ''}`}>
-        <div className='card_Front' onClick={handleFlip}>
+        <div className='card_Front'>
           <div className='info'>
             <div className='image-container'>
               <img
@@ -26,10 +26,16 @@ const MediaItem: React.FC<MediaItemProps> = ({ item }) => {
                 src={`https://image.tmdb.org/t/p/w200${item.poster_path}`}
               />
             </div>
-            <IoIosInformationCircle size={24} />
+            <div className='infoBox'>
+              <IoIosInformationCircle
+                color='white'
+                size={24}
+                onClick={handleFlip}
+              />
+            </div>
           </div>
         </div>
-        <div className='card_Back' onClick={handleFlip}>
+        <div className='card_Back'>
           <div className='info'>
             <h4>{item.title ? item.title : item.name}..</h4>
             <TfiBackRight size={24} />
