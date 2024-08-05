@@ -39,8 +39,6 @@ const MediaItem: React.FC<MediaItemProps> = ({ item }) => {
           <div className='info'>
             <h4>{item.title ? item.title : item.name}..</h4>
             <TfiBackRight size={24} />
-            <br />
-            <br />
           </div>
         </div>
       </div>
