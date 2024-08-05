@@ -1,5 +1,5 @@
 .CardBox {
-  background-color: rgb(251, 215, 215);
+  background-color: rgb(245, 215, 251);
   margin: 1rem;
   max-width: 20rem;
   position: relative;
@@ -26,6 +26,10 @@
   position: absolute;
   right: 3px;
   top: 3px;
+}
+.info .liked_svg {
+  position: absolute;
+  right: 30px;
 }
 .card_Front .info svg {
   background-color: black;

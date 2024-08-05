@@ -8,4 +8,5 @@ export type Media = {
   backdrop_path: string;
   // 필요한 다른 필드들을 추가하세요
   vote_average: number;
+  userId?: string;
 };
